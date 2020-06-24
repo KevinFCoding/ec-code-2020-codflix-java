@@ -4,11 +4,13 @@ public class User {
     private int id;
     private String email;
     private String password;
+    private Boolean verified;
 
-    public User(int id, String email, String password) {
+    public User(int id, String email, String password, Boolean verified) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.verified = verified;
     }
 
     @Override
@@ -42,5 +44,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 }

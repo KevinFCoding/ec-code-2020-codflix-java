@@ -1,6 +1,7 @@
 package com.codflix.backend.features.user;
 
 import com.codflix.backend.core.Conf;
+import com.codflix.backend.core.Database;
 import com.codflix.backend.core.Template;
 import com.codflix.backend.models.User;
 import com.codflix.backend.utils.URLUtils;
@@ -10,6 +11,10 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,11 +34,20 @@ public class AuthController {
         Map<String, String> query = URLUtils.decodeQuery(request.body());
         String email = query.get("email");
         String password = query.get("password");
+        String verified = query.get("verified");
+
 
         // Authenticate user
-        User user = userDao.getUserByCredentials(email, password);
+        User user = userDao.getUserByCredentials(email, password, verified);
         if (user == null) {
+
             logger.info("User not found. Redirect to login");
+            response.removeCookie("session");
+            response.redirect("/login");
+            return "KO";
+        }
+        else if(verified == "0") {
+            logger.info("User not verified, wait for verified status");
             response.removeCookie("session");
             response.redirect("/login");
             return "KO";
@@ -51,7 +65,15 @@ public class AuthController {
 
     public String signUp(Request request, Response response) {
         Map<String, Object> model = new HashMap<>();
-        return Template.render("auth_signup.html", model);
+
+        if (request.requestMethod().equals("GET")) {
+            return Template.render("auth_signup.html", model);
+        }
+        else if (request.requestMethod().equals("POST")) {
+            return "ok";
+        }
+        response.redirect(Conf.ROUTE_NOTLOGGED_ROOT);
+        return "KO";
     }
 
     public String logout(Request request, Response response) {
