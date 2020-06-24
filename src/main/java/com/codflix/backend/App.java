@@ -7,6 +7,7 @@ import com.codflix.backend.features.genre.GenreController;
 import com.codflix.backend.features.history.HistoryController;
 import com.codflix.backend.features.media.MediaController;
 import com.codflix.backend.features.other.HomeController;
+import com.codflix.backend.features.other.ContactController;
 import com.codflix.backend.features.user.AuthController;
 import com.codflix.backend.middlewares.AuthMiddleware;
 import com.codflix.backend.middlewares.LoggerMiddleware;
@@ -32,6 +33,7 @@ public class App {
         GenreController genre = new GenreController();
         MediaController media = new MediaController();
         HistoryController history = new HistoryController();
+        ContactController contact = new ContactController();
 
         // Routes
         // Every request should be mapped here to a controller method
@@ -41,11 +43,12 @@ public class App {
         Spark.get("/signup", (req, res) -> auth.signUp(req, res));
         Spark.get("logout", (req, res) -> auth.logout(req, res));
 
+
         Spark.get("/genres/", (req, res) -> genre.list(req, res));
         Spark.get("/medias/:id", (req, res) -> media.detail(req, res));
         Spark.get("/medias/", (req, res) -> media.list(req, res));
         Spark.get("/histories/", (req, res) -> history.list(req, res));
-
+        Spark.get("/contact/", (req, res) -> contact.contact(req, res));
         Spark.get("/", (req, res) -> home.home(req, res));
     }
 

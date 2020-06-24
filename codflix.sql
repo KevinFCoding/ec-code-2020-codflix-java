@@ -172,3 +172,16 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Alteration from Kevin Fagot
+--
+
+-- Add the base user to log in.
+INSERT INTO user (email, password) VALUES ('coding@gmail.com', '123456');
+
+-- Add a way to know if the user is verified with a boolean on user
+ALTER TABLE user ADD verified BOOL NOT NULL AFTER password;
+
+
+
