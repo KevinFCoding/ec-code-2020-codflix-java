@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
+import spark.Session;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,11 +20,15 @@ public class ProfilController {
 
     public String detail(Request request, Response res) {
 
-        int id = Integer.parseInt(request.params("id"));
-        User user = userDao.getUserById(id);
+        Session session = request.session(false);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("user", user);
         return Template.render("profil.html", model);
     }
-}
+
+    public String updateDb(Request request, Response res) {
+        return "KO";
+    }
+
+
+    }
