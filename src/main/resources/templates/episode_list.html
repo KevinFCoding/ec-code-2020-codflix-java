@@ -16,12 +16,15 @@
 
 <div class="media-list">
     #foreach($episode in $episodes)
-    #if $episode.getEpisodeNumber() == 1
-    <div class="raw">
-        <label>Saison $episode.getSeasonNumber()</label>
-    </div>
+
+    #if ($episode.getEpisodeNumber() == 1)
+    <div class="row">
+        <label>Saison $episode.getSeasonNumber()<br></label>
+
     #end
-    <a class="item" href="/medias/$episodes.getSerieId()/episodes/$episodes.getId()">
+
+    <div>
+    <a class="item" href="/medias/$episode.getSerieId()/episodes/$episode.getId()">
         <div class="video">
             <div>
                 <iframe allowfullscreen="" frameborder="0"
@@ -29,9 +32,11 @@
             </div>
         </div>
         <div class="title">
-            $episode.getEpisodetitle()
+            $episode.getEpisodeTitle()
         </div>
     </a>
+    </div>
     #end
+    </div>
 </div>
 #end

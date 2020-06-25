@@ -11,13 +11,16 @@
             <div>
                 <a class="item" href="/medias/$media.getId()/episodes">
                 <button type="button" class="btn btn-secondary">Voir les épisodes</button></a>
+
+                <p>Temps totale de la série : </p>
             </div>
         #end
     </div>
     <div class="col-md-3 col-sm-12 ">
         <div id="side-details">
             <h2>$media.getTitle()</h2>
-            <p>Type : $genre.getName()</p>
+            <span>Durée : $media.getTimeMedia() minutes</span>
+            <p>$media.getSummary()</p>
         </div>
     </div>
 </div>

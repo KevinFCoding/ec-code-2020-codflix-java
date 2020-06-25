@@ -19,7 +19,7 @@ public class SerieDao {
         List<Episode_Media> episodes = new ArrayList<>();
         Connection connection = Database.get().getConnection();
         try {
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM media_episodes WHERE id_media_serie=? ORDER BY release_date DESC");
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM media_episodes WHERE id_media_serie=? ORDER BY release_date ASC");
             st.setInt(1, media_id);
             ResultSet rs = st.executeQuery();
 
@@ -34,6 +34,7 @@ public class SerieDao {
 
     public Episode_Media getEpisodeById(int id) {
 
+        System.out.println(id);
         Episode_Media episode = null;
         Connection connection = Database.get().getConnection();
         try {
@@ -56,10 +57,11 @@ public class SerieDao {
                 rs.getInt(2), // id_media_serie
                 rs.getString(3), // episode_title
                 rs.getString(4), //summary
-                DATE_FORMAT.parse(rs.getString(5)), // release_date
-                rs.getInt(6), // summary
-                rs.getInt(7), // trailer_url
-                rs.getString(8)
+                DATE_FORMAT.parse(rs.getString(5)),
+                rs.getInt(6),// release_date
+                rs.getInt(7), // summary
+                rs.getInt(8), // trailer_url
+                rs.getString(9)
         );
     }
 

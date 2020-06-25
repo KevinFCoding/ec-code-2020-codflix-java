@@ -27,10 +27,11 @@ public class SerieController {
 
         public String detail(Request request, Response res) {
             int id = Integer.parseInt(request.params(":id"));
-            Episode_Media episodes = serieDao.getEpisodeById(id);
+            System.out.println(id);
+            Episode_Media episode = serieDao.getEpisodeById(id);
 
             Map<String, Object> model = new HashMap<>();
-            model.put("media", episodes);
-            return Template.render("media_detail.html", model);
+            model.put("episode", episode);
+            return Template.render("episode_detail.html", model);
         }
     }
