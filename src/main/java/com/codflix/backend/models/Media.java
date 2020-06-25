@@ -9,16 +9,18 @@ public class Media {
     private String type;
     private String status;
     private Date releaseDate;
+    private int timeMedia;
     private String summary;
     private String trailerUrl;
 
-    public Media(int id, int genreId, String title, String type, String status, Date releaseDate, String summary, String trailerUrl) {
+    public Media(int id, int genreId, String title, String type, String status, Date releaseDate, int timeMedia, String summary, String trailerUrl) {
         this.id = id;
         this.genreId = genreId;
         this.title = title;
         this.type = type;
         this.status = status;
         this.releaseDate = releaseDate;
+        this.timeMedia = timeMedia;
         this.summary = summary;
         this.trailerUrl = trailerUrl;
     }
@@ -83,6 +85,14 @@ public class Media {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public int getTimeMedia() {
+        return timeMedia;
+    }
+
+    public void setTimeMedia(int timeMedia) {
+        this.timeMedia = timeMedia;
     }
 
     public String getSummary() {

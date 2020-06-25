@@ -9,16 +9,18 @@ public class Episode_Media {
     private String episode_title;
     private String summary;
     private Date releaseDate;
+    private int episode_length;
     private int episode_number;
     private int season_number;
     private String episode_url;
 
-    public Episode_Media(int id, int id_media_serie, String episode_title, String summary, Date releaseDate, int episode_number, int season_number, String episode_url) {
+    public Episode_Media(int id, int id_media_serie, String episode_title, String summary, Date releaseDate, int episode_length, int episode_number, int season_number, String episode_url) {
         this.id = id;
         this.id_media_serie = id_media_serie;
         this.episode_title = episode_title;
         this.summary = summary;
         this.releaseDate = releaseDate;
+        this.episode_length = episode_length;
         this.episode_number = episode_number;
         this.season_number = season_number;
         this.episode_url = episode_url;
@@ -54,7 +56,7 @@ public class Episode_Media {
         this.id_media_serie = id_media_serie;
     }
 
-    public String getEpisodetitle() {
+    public String getEpisodeTitle() {
         return episode_title;
     }
 
@@ -76,6 +78,14 @@ public class Episode_Media {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public int getTimeEpisode() {
+        return episode_length;
+    }
+
+    public void setTimeEpisode(int episode_length) {
+        this.episode_length = episode_length;
     }
 
     public int getEpisodeNumber() {
