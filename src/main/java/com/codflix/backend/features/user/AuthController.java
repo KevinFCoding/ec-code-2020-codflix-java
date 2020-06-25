@@ -10,6 +10,7 @@ import spark.Response;
 import spark.Session;
 
 import javax.swing.*;
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +29,8 @@ public class AuthController {
         Map<String, String> query = URLUtils.decodeQuery(request.body());
         String email = query.get("email");
         String password = query.get("password");
+
+        password = sha256(password);
 
         // Authenticate user
         User user = userDao.getUserByCredentials(email, password);
@@ -49,6 +52,23 @@ public class AuthController {
         response.redirect(Conf.ROUTE_LOGGED_ROOT);
         return "OK";
     }
+    public static String sha256(String base) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(base.getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
 
     public String signUp(Request request, Response response) {
 
@@ -62,16 +82,21 @@ public class AuthController {
             String password = query.get("password");
             String password_confirm = query.get("password_confirm");
 
-            if (password == password_confirm) {
+            if (password.equals(password_confirm)) {
+                System.out.println("wut");
+                password = sha256(password);
                 userDao.addUnverifiedUser(email, password);
+                response.redirect(Conf.ROUTE_LOGGED_ROOT);
+
+                return "OK";
             }
             else {
+
+                System.out.println("wtf");
                 return "KO : " + password + " " + password_confirm;
             }
-            return "KO";
         }
         response.redirect(Conf.ROUTE_NOTLOGGED_ROOT);
-
         return "OK";
     }
 
@@ -86,4 +111,5 @@ public class AuthController {
 
         return "";
     }
+
 }

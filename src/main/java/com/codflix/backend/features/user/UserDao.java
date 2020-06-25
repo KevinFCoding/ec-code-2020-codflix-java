@@ -4,6 +4,8 @@ import com.codflix.backend.core.Database;
 import com.codflix.backend.models.User;
 
 import javax.swing.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.sql.*;
 
 public class UserDao {
@@ -71,6 +73,8 @@ public class UserDao {
 
     public void addUnverifiedUser(String email, String password){
 
+        System.out.println(password);
+
         Connection connection = Database.get().getConnection();
         try {
             String query = " INSERT INTO user (email, password, verified)"
@@ -83,9 +87,6 @@ public class UserDao {
             preparedStmt.setBoolean(3, false);
 
             preparedStmt.execute();
-            connection.close();
-
-            JOptionPane.showInputDialog("Utilisateur ajouté");
 
         } catch (SQLException e) {
             e.printStackTrace();
