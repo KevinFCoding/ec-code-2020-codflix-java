@@ -1,5 +1,8 @@
 package com.codflix.backend.models;
 
+/**
+ * Model for the users
+ */
 public class User {
     private int id;
     private String email;

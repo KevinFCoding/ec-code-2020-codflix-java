@@ -7,11 +7,18 @@ import com.codflix.backend.models.User;
 import spark.Request;
 import spark.Response;
 import spark.Session;
-import spark.Spark;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/**
+ *
+ * History not finished
+ * Data are getting in place, receive when someone is consulting a Movie / Serie
+ * Add itself to the page historic (only datas, no url).
+ *
+ */
 
 public class HistoryController {
     private final HistoryDao historyDao = new HistoryDao();

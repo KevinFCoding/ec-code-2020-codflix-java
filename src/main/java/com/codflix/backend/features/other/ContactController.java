@@ -13,6 +13,14 @@ import java.util.Properties;
 
 public class ContactController {
 
+    /**
+     * Made to reach contact without logging in // unfinished.
+     * @param request
+     * @param response
+     * @return
+     */
+
+    //TODO finish access contact when not logged in.
     public String accessContact(Request request, Response response) {
 
         // If there is an active session, redirect to the logged root route

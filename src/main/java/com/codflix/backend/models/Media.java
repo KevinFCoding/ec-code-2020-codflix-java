@@ -2,6 +2,10 @@ package com.codflix.backend.models;
 
 import java.util.Date;
 
+
+/**
+ * Model for the medias
+ */
 public class Media {
     private int id;
     private int genreId;

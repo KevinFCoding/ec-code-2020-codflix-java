@@ -1,5 +1,8 @@
 package com.codflix.backend.models;
 
+/**
+ * Model for Genre
+ */
 public class Genre {
     private int id;
     private String name;

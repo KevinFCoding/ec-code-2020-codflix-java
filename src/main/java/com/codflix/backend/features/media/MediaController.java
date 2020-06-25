@@ -13,15 +13,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * Main function at the moment, get Media Data, History & Genre, display them for the user
+ *
+ */
 
 public class MediaController {
     private final MediaDao mediaDao = new MediaDao();
     private final GenreDao genreDao = new GenreDao();
     private final HistoryDao historyDao = new HistoryDao();
 
+    /**
+     * Get all media to display on media lists
+     * @param request Send directly when going to Media
+     * @param response
+     * @return
+     */
     public String list(Request request, Response response) {
         List<Media> medias;
-
         String title = request.queryParams("title");
 
         if (title != null && !title.isEmpty()) {
@@ -29,7 +39,6 @@ public class MediaController {
         } else {
             medias = mediaDao.getAllMedias();
         }
-
         Map<String, Object> model = new HashMap<>();
         model.put("medias", medias);
         return Template.render("media_list.html", model);
@@ -55,6 +64,12 @@ public class MediaController {
         return Template.render("media_detail.html", model);
     }
 
+    /**
+     * Use the same filterMedias than list to get all filtered Medias
+     * @param request From the search on dashboard, use a LIKE %% to get all Datas
+     * @param res
+     * @return
+     */
     public String search(Request request, Response res) {
         List<Media> medias;
         System.out.println("got here");
@@ -65,6 +80,11 @@ public class MediaController {
         return Template.render("media_list.html", model);
     }
 
+    /**
+     * Unused, to convert time in hours, minuts, seconds
+     * @param millie
+     * @return
+     */
     public static String convertMillieToHMmSs(long millie) {
         long seconds = (millie / 1000);
         long second = seconds % 60;

@@ -1,5 +1,8 @@
 package com.codflix.backend.models;
 
+/**
+ * Model for history
+ */
 public class History {
     private int id;
     private int userId;

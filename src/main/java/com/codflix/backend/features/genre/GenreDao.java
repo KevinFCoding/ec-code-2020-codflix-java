@@ -1,9 +1,7 @@
 package com.codflix.backend.features.genre;
 
 import com.codflix.backend.core.Database;
-import com.codflix.backend.models.Episode_Media;
 import com.codflix.backend.models.Genre;
-import com.codflix.backend.models.Media;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -33,6 +31,11 @@ public class GenreDao {
         return genres;
     }
 
+    /**
+     * Called by Media to get the Genre of the Movie /Serie
+     * @param id the id of the Media, FK with Genre table
+     * @return all data in table Genre where the ID match
+     */
     public Genre getGenreById(int id) {
         Genre genre = null;
         Connection connection = Database.get().getConnection();
@@ -51,6 +54,13 @@ public class GenreDao {
         return genre;
     }
 
+    /**
+     *
+     * @param rs the Request result set up.
+     * @return mapping of the genre for remote access
+     * @throws SQLException
+     * @throws ParseException
+     */
     private Genre mapToGenre(ResultSet rs) throws SQLException, ParseException {
         return new Genre(
                 rs.getInt(1), // id

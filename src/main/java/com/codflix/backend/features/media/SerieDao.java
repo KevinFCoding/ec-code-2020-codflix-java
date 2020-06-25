@@ -12,9 +12,16 @@ import java.util.List;
 
 public class SerieDao {
 
-
+    /**
+     * Setting Date format for the Database.
+     */
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
+    /**
+     * Target the list of episodes for the serie.
+     * @param media_id
+     * @return All episodes with the right season id.
+     */
     public List<Episode_Media> getEpisodeByMediaID(int media_id) {
         List<Episode_Media> episodes = new ArrayList<>();
         Connection connection = Database.get().getConnection();
@@ -32,6 +39,11 @@ public class SerieDao {
         return episodes;
     }
 
+    /**
+     *Target the specific episode for detail and streaming.
+     * @param id the id of the episodes from the specified series.
+     * @return
+     */
     public Episode_Media getEpisodeById(int id) {
 
         System.out.println(id);

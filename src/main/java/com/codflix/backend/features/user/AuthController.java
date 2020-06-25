@@ -20,17 +20,25 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private final UserDao userDao = new UserDao();
 
+    /**
+     * Login to the application, request to Database to check if user registered and Verified.
+     * @param request
+     * @param response
+     * @return
+     */
     public String login(Request request, Response response) {
         if (request.requestMethod().equals("GET")) {
             Map<String, Object> model = new HashMap<>();
             return Template.render("auth_login.html", model);
         }
-
         // Get parameters
         Map<String, String> query = URLUtils.decodeQuery(request.body());
         String email = query.get("email");
         String password = query.get("password");
 
+        /**
+         * sha256 encryption in database
+         */
         password = sha256(password);
 
         // Authenticate user
@@ -42,6 +50,9 @@ public class AuthController {
             response.redirect("/login");
             return "KO";
         }
+
+        //TODO finish verification part of user
+
         //boolean isBoolean = userDao.isUserVerified(email);
 
         // Create session
@@ -54,6 +65,11 @@ public class AuthController {
         return "OK";
     }
 
+    /**
+     * Add the encryption for the password in database.
+     * @param base the password from the user
+     * @return
+     */
     public static String sha256(String base) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -72,6 +88,13 @@ public class AuthController {
         }
     }
 
+    /**
+     * Verification if user is already registered in DB //TODO
+     * Add user to Database, set Boolean verified to false, waiting for verification
+     * @param request
+     * @param response
+     * @return
+     */
     public String signUp(Request request, Response response) {
 
         Map<String, Object> model = new HashMap<>();
@@ -99,6 +122,12 @@ public class AuthController {
         return "OK";
     }
 
+    /**
+     * Stop session and redirection to home page for login.
+     * @param request
+     * @param response
+     * @return
+     */
     public String logout(Request request, Response response) {
         Session session = request.session(false);
         if (session != null) {

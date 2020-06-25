@@ -9,6 +9,13 @@ import java.security.MessageDigest;
 import java.sql.*;
 
 public class UserDao {
+
+    /**
+     * Get user directly by its email and password, not its personnal ID
+     * @param email email user in DB
+     * @param password password user
+     * @return all data from user with the right email AND password
+     */
     public User getUserByCredentials(String email, String password) {
         User user = null;
 
@@ -39,6 +46,11 @@ public class UserDao {
         );
     }
 
+    /**
+     * Target sepcified user with its ID
+     * @param userId
+     * @return all data in DB from the user specified.
+     */
     public User getUserById(int userId) {
         User user = null;
         Connection connection = Database.get().getConnection();
@@ -58,6 +70,11 @@ public class UserDao {
         return user;
     }
 
+    /**
+     * TODO the set-up to check if user is verified : limited access and asking for verification on email
+     * @param email
+     * @return
+     */
     public boolean isUserVerified(String email) {
         Connection connection = Database.get().getConnection();
         try {
@@ -71,6 +88,11 @@ public class UserDao {
         return true;
     }
 
+    /**
+     * Add user to DB with the unverified status
+     * @param email email user from form
+     * @param password password user
+     */
     public void addUnverifiedUser(String email, String password) {
 
         System.out.println(password);

@@ -2,6 +2,9 @@ package com.codflix.backend.models;
 
 import java.util.Date;
 
+/**
+ * Model for the Episode
+ */
 public class Episode_Media {
 
     private int id;

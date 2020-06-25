@@ -13,6 +13,10 @@ public class MediaDao {
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
+    /**
+     * Directly select all Datas in Media for display, the more recent film are displayed first
+     * @return all Datas about the Media, id, time, type, genre ...
+     */
     public List<Media> getAllMedias() {
         List<Media> medias = new ArrayList<>();
 
@@ -30,6 +34,12 @@ public class MediaDao {
         return medias;
     }
 
+    /**
+     * Used by the search function to target specified medias.
+     * @param title full or part of the title searched.
+     *              No ajax.
+     * @return
+     */
     public List<Media> filterMedias(String title) {
         List<Media> medias = new ArrayList<>();
         Connection connection = Database.get().getConnection();
@@ -47,6 +57,11 @@ public class MediaDao {
         return medias;
     }
 
+    /**
+     * Directly get the specified Media by its ID, used for Details
+     * @param id Target the media_id for details.
+     * @return
+     */
     public Media getMediaById(int id) {
 
         Media media = null;
@@ -65,6 +80,13 @@ public class MediaDao {
         return media;
     }
 
+    /**
+     * Map for remote use.
+     * @param rs
+     * @return
+     * @throws SQLException
+     * @throws ParseException
+     */
     private Media mapToMedia(ResultSet rs) throws SQLException, ParseException {
         return new Media(
                 rs.getInt(1), // id
