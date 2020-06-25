@@ -1,7 +1,7 @@
 #parse("dashboard.html")
 #@mainLayout()
 
-<div class="row">
+<div class="row p-4">
     <div class="col-md-4 offset-md-8">
         <form action="/medias/" method="get">
             <div class="form-group has-btn">
@@ -14,29 +14,28 @@
     </div>
 </div>
 
-<div class="media-list">
+<div class="media-list p-4">
     #foreach($episode in $episodes)
 
     #if ($episode.getEpisodeNumber() == 1)
     <div class="row">
         <label>Saison $episode.getSeasonNumber()<br></label>
 
-    #end
-
-    <div>
-    <a class="item" href="/medias/$episode.getSerieId()/episodes/$episode.getId()">
-        <div class="video">
-            <div>
-                <iframe allowfullscreen="" frameborder="0"
-                        src="$episode.getEpisodeUrl()" ></iframe>
-            </div>
+        #end
+        <div>
+            <a class="item" href="/medias/$episode.getSerieId()/episodes/$episode.getId()">
+                <div class="video">
+                    <div>
+                        <iframe allowfullscreen="" frameborder="0"
+                                src="$episode.getEpisodeUrl()"></iframe>
+                    </div>
+                </div>
+                <div class="title">
+                    $episode.getEpisodeTitle()
+                </div>
+            </a>
         </div>
-        <div class="title">
-            $episode.getEpisodeTitle()
-        </div>
-    </a>
-    </div>
-    #end
+        #end
     </div>
 </div>
 #end

@@ -12,6 +12,7 @@ import java.util.List;
 public class MediaDao {
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
     public List<Media> getAllMedias() {
         List<Media> medias = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class MediaDao {
     public List<Media> filterMedias(String title) {
         List<Media> medias = new ArrayList<>();
         Connection connection = Database.get().getConnection();
-        title = '%'+title+'%';
+        title = '%' + title + '%';
         try {
             PreparedStatement st = connection.prepareStatement("SELECT * FROM media WHERE title LIKE ? ORDER BY release_date DESC");
             st.setString(1, title);

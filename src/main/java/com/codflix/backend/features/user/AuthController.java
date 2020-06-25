@@ -1,4 +1,5 @@
 package com.codflix.backend.features.user;
+
 import com.codflix.backend.core.Conf;
 import com.codflix.backend.core.Template;
 import com.codflix.backend.models.User;
@@ -52,20 +53,21 @@ public class AuthController {
         response.redirect(Conf.ROUTE_LOGGED_ROOT);
         return "OK";
     }
+
     public static String sha256(String base) {
-        try{
+        try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(base.getBytes("UTF-8"));
             StringBuffer hexString = new StringBuffer();
 
             for (int i = 0; i < hash.length; i++) {
                 String hex = Integer.toHexString(0xff & hash[i]);
-                if(hex.length() == 1) hexString.append('0');
+                if (hex.length() == 1) hexString.append('0');
                 hexString.append(hex);
             }
 
             return hexString.toString();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -75,22 +77,19 @@ public class AuthController {
         Map<String, Object> model = new HashMap<>();
         if (request.requestMethod().equals("GET")) {
             return Template.render("auth_signup.html", model);
-        }
-        else if (request.requestMethod().equals("POST")) {
+        } else if (request.requestMethod().equals("POST")) {
             Map<String, String> query = URLUtils.decodeQuery(request.body());
             String email = query.get("email");
             String password = query.get("password");
             String password_confirm = query.get("password_confirm");
 
             if (password.equals(password_confirm)) {
-                System.out.println("wut");
                 password = sha256(password);
                 userDao.addUnverifiedUser(email, password);
                 response.redirect(Conf.ROUTE_LOGGED_ROOT);
 
                 return "OK";
-            }
-            else {
+            } else {
 
                 System.out.println("wtf");
                 return "KO : " + password + " " + password_confirm;

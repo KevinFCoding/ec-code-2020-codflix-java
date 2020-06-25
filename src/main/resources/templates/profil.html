@@ -2,31 +2,32 @@
 #@mainLayout()
 
 <h2>Profil de $user.getMail()</h2>
-<div> <form method="POST" action="/profil" class="custom-form">
+<div>
+    <form method="POST" action="/profil" class="custom-form">
 
-    <div class="form-group">
-        <label for="email">Adresse email</label>
-        <input type="email" name="email" value="" id="email" class="form-control" />
-    </div>
+        <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" name="email" value="" id="email" class="form-control"/>
+        </div>
 
-    <div class="form-group">
-        <label for="contact_message_to_send">Confirmez votre mot de passe</label>
-        <input type="text" name="contact_message_to_send" id="contact_message_to_send" class="form-control" />
-    </div>
+        <div class="form-group">
+            <label for="contact_message_to_send">Confirmez votre mot de passe</label>
+            <input type="text" name="contact_message_to_send" id="contact_message_to_send" class="form-control"/>
+        </div>
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6">
-                <input type="submit" name="Valider" class="btn btn-block bg-red" />
-            </div>
-            <div class="col-md-6">
-                <a href="/contact" class="btn btn-block bg-blue">Envoyer</a>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" name="Valider" class="btn btn-block bg-red"/>
+                </div>
+                <div class="col-md-6">
+                    <a href="/contact" class="btn btn-block bg-blue">Envoyer</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <span class="error-msg">
+        <span class="error-msg">
     </span>
-</form>
+    </form>
 </div>
 #end

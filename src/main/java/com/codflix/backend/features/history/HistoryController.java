@@ -29,7 +29,7 @@ public class HistoryController {
         int userId = Integer.parseInt(userIdStr);
 
         User user = userDao.getUserById(userId);
-            histories = historyDao.getStreamsHistoryForUser(userId);
+        histories = historyDao.getStreamsHistoryForUser(userId);
 
         Map<String, Object> model = new HashMap<>();
         model.put("user", user);

@@ -23,10 +23,9 @@ public class ContactController {
         return Template.render("contact.html", model);
     }
 
-    public static void contactUs(){
+    public static void contactUs() {
 
     }
-
 
 
 }

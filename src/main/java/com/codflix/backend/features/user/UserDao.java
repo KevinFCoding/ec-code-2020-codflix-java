@@ -58,7 +58,7 @@ public class UserDao {
         return user;
     }
 
-    public boolean isUserVerified(String email){
+    public boolean isUserVerified(String email) {
         Connection connection = Database.get().getConnection();
         try {
             PreparedStatement st = connection.prepareStatement("SELECT verified FROM user WHERE email=?");
@@ -71,7 +71,7 @@ public class UserDao {
         return true;
     }
 
-    public void addUnverifiedUser(String email, String password){
+    public void addUnverifiedUser(String email, String password) {
 
         System.out.println(password);
 
@@ -82,8 +82,8 @@ public class UserDao {
 
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, email);
-            preparedStmt.setString (2, password);
+            preparedStmt.setString(1, email);
+            preparedStmt.setString(2, password);
             preparedStmt.setBoolean(3, false);
 
             preparedStmt.execute();

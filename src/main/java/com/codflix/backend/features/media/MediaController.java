@@ -37,7 +37,7 @@ public class MediaController {
         mediaDao.getMediaById(id).getTrailerUrl();
 
         Map<String, Object> model = new HashMap<>();
-            model.put("media", media);
+        model.put("media", media);
         return Template.render("media_detail.html", model);
     }
 
@@ -51,7 +51,7 @@ public class MediaController {
         return Template.render("media_list.html", model);
     }
 
-    public int mediaLength(Request request, Response res){
+    public int mediaLength(Request request, Response res) {
         return 1;
     }
 
@@ -65,9 +65,8 @@ public class MediaController {
         String result = "";
         if (hour > 0) {
             return String.format("%02d:%02d:%02d", hour, minute, second);
-        }
-        else {
-            return String.format("%02d:%02d" , minute, second);
+        } else {
+            return String.format("%02d:%02d", minute, second);
         }
 
     }

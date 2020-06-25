@@ -1,7 +1,7 @@
 #parse("dashboard.html")
 #@mainLayout()
 
-<div class="row">
+<div class="row p-4">
     <div class="col-md-4 offset-md-8">
         <form action="/medias/" method="get">
             <div class="form-group has-btn search">
@@ -16,18 +16,18 @@
 <div class="media-list">
     #foreach($media in $medias)
 
-        <a class="item" href="/medias/$media.getId()">
-            <div class="video">
-                <div>
-                    <iframe allowfullscreen="" frameborder="0"
-                            src="$media.getTrailerUrl()"></iframe>
-                </div>
+    <a class="item" href="/medias/$media.getId()">
+        <div class="video">
+            <div>
+                <iframe allowfullscreen="" frameborder="0"
+                        src="$media.getTrailerUrl()"></iframe>
             </div>
-            <div class="title">
-                $media.getTitle()
+        </div>
+        <div class="title">
+            $media.getTitle()
 
-            </div>
-        </a>
+        </div>
+    </a>
     #end
 </div>
 #end
