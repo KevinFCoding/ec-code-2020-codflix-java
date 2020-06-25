@@ -14,6 +14,7 @@ public class GenreController {
     private final GenreDao genreDao = new GenreDao();
 
     public String list(Request request, Response response) {
+
         List<Genre> genres = genreDao.getAllGenres();
 
         Map<String, Object> model = new HashMap<>();

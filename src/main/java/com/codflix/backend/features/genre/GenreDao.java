@@ -2,11 +2,10 @@ package com.codflix.backend.features.genre;
 
 import com.codflix.backend.core.Database;
 import com.codflix.backend.models.Genre;
+import com.codflix.backend.models.Media;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,4 +31,6 @@ public class GenreDao {
 
         return genres;
     }
+
+
 }
