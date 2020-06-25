@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MediaDao {
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public List<Media> getAllMedias() {
         List<Media> medias = new ArrayList<>();
 
@@ -48,14 +48,12 @@ public class MediaDao {
     }
 
     public Media getMediaById(int id) {
-        Media media = null;
 
+        Media media = null;
         Connection connection = Database.get().getConnection();
         try {
             PreparedStatement st = connection.prepareStatement("SELECT * FROM media WHERE id=?");
-
             st.setInt(1, id);
-
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 media = mapToMedia(rs);
@@ -79,4 +77,5 @@ public class MediaDao {
                 rs.getString(8) // trailer_url
         );
     }
+
 }
