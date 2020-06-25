@@ -10,13 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class MediaController {
     private final MediaDao mediaDao = new MediaDao();
 
     public String list(Request request, Response response) {
         List<Media> medias;
 
-        String title = request.queryParams("titl");
+        String title = request.queryParams("title");
 
         if (title != null && !title.isEmpty()) {
             medias = mediaDao.filterMedias(title);
@@ -33,8 +34,27 @@ public class MediaController {
         int id = Integer.parseInt(request.params(":id"));
         Media media = mediaDao.getMediaById(id);
 
+        mediaDao.getMediaById(id).getTrailerUrl();
+
         Map<String, Object> model = new HashMap<>();
         model.put("media", media);
         return Template.render("media_detail.html", model);
+    }
+
+
+    public static String convertMillieToHMmSs(long millie) {
+        long seconds = (millie / 1000);
+        long second = seconds % 60;
+        long minute = (seconds / 60) % 60;
+        long hour = (seconds / (60 * 60)) % 24;
+
+        String result = "";
+        if (hour > 0) {
+            return String.format("%02d:%02d:%02d", hour, minute, second);
+        }
+        else {
+            return String.format("%02d:%02d" , minute, second);
+        }
+
     }
 }
