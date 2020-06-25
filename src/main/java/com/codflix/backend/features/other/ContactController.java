@@ -15,8 +15,6 @@ public class ContactController {
 
     public String accessContact(Request request, Response response) {
 
-
-
         // If there is an active session, redirect to the logged root route
 
         Session session = request.session(false);

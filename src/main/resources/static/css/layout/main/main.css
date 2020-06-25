@@ -8,5 +8,6 @@
 @import url('menu.css');
 
 #content {
+    color : #FFF;
     background-color: #373737;
 }
