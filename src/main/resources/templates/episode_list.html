@@ -17,25 +17,24 @@
 <div class="media-list p-4">
     #foreach($episode in $episodes)
 
+    <!-- Adding dynamically seasons-->
     #if ($episode.getEpisodeNumber() == 1)
     <div class="row">
-        <label>Saison $episode.getSeasonNumber()<br></label>
-
-        #end
-        <div>
-            <a class="item" href="/medias/$episode.getSerieId()/episodes/$episode.getId()">
-                <div class="video">
-                    <div>
-                        <iframe allowfullscreen="" frameborder="0"
-                                src="$episode.getEpisodeUrl()"></iframe>
-                    </div>
-                </div>
-                <div class="title">
-                    $episode.getEpisodeTitle()
-                </div>
-            </a>
-        </div>
-        #end
+        <span>Saison $episode.getSeasonNumber()<br></span>
     </div>
+    #end
+    <a class="item" href="/medias/$episode.getSerieId()/episodes/$episode.getId()">
+        <div class="video">
+            <div>
+                <iframe allowfullscreen="" frameborder="0"
+                        src="$episode.getEpisodeUrl()"></iframe>
+            </div>
+        </div>
+        <div class="title">
+            $episode.getEpisodeTitle()
+        </div>
+    </a>
+    #end
+</div>
 </div>
 #end

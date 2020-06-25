@@ -1,6 +1,8 @@
 package com.codflix.backend.features.media;
 
 import com.codflix.backend.core.Template;
+import com.codflix.backend.features.genre.GenreDao;
+import com.codflix.backend.models.Genre;
 import com.codflix.backend.models.Media;
 import spark.Request;
 import spark.Response;
@@ -13,6 +15,7 @@ import java.util.Map;
 
 public class MediaController {
     private final MediaDao mediaDao = new MediaDao();
+    private final GenreDao genreDao = new GenreDao();
 
     public String list(Request request, Response response) {
         List<Media> medias;
@@ -33,11 +36,13 @@ public class MediaController {
     public String detail(Request request, Response res) {
         int id = Integer.parseInt(request.params(":id"));
         Media media = mediaDao.getMediaById(id);
+        Genre genre = genreDao.getGenreById(media.getGenreId());
 
         mediaDao.getMediaById(id).getTrailerUrl();
 
         Map<String, Object> model = new HashMap<>();
         model.put("media", media);
+        model.put("genre", genre);
         return Template.render("media_detail.html", model);
     }
 
@@ -51,11 +56,6 @@ public class MediaController {
         return Template.render("media_list.html", model);
     }
 
-    public int mediaLength(Request request, Response res) {
-        return 1;
-    }
-
-
     public static String convertMillieToHMmSs(long millie) {
         long seconds = (millie / 1000);
         long second = seconds % 60;
@@ -68,6 +68,5 @@ public class MediaController {
         } else {
             return String.format("%02d:%02d", minute, second);
         }
-
     }
 }

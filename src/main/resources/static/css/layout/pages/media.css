@@ -52,6 +52,16 @@
 
 }
 
+.media-list .row span{
+    color: #a71d2a;
+}
+
+.media-list .row{
+    overflow-x: scroll;
+    border: 1px solid black;
+    display: inline-block;
+}
+
 #display-media {
     padding-right: 0px;
 }
