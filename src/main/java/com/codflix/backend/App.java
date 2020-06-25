@@ -49,6 +49,7 @@ public class App {
         Spark.get("/genres/", (req, res) -> genre.list(req, res));
         Spark.get("/medias/:id", (req, res) -> media.detail(req, res));
         Spark.get("/medias/", (req, res) -> media.list(req, res));
+        Spark.get("/medias/search/", (req, res) -> media.search(req, res));
         Spark.get("/medias/:id/episodes", (req, res) -> serie.list(req, res));
         Spark.get("/medias/:id/episodes/:id", (req, res) -> serie.detail(req, res));
         Spark.get("/histories/", (req, res) -> history.list(req, res));

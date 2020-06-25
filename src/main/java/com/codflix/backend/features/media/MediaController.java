@@ -37,8 +37,22 @@ public class MediaController {
         mediaDao.getMediaById(id).getTrailerUrl();
 
         Map<String, Object> model = new HashMap<>();
-        model.put("media", media);
+            model.put("media", media);
         return Template.render("media_detail.html", model);
+    }
+
+    public String search(Request request, Response res) {
+        List<Media> medias;
+        System.out.println("got here");
+        String title = request.queryParams("title");
+        medias = mediaDao.filterMedias(title);
+        Map<String, Object> model = new HashMap<>();
+        model.put("medias", medias);
+        return Template.render("media_list.html", model);
+    }
+
+    public int mediaLength(Request request, Response res){
+        return 1;
     }
 
 
