@@ -6,3 +6,7 @@
 @import url('forms.css');
 @import url('footer.css');
 @import url('menu.css');
+
+#content {
+    background-color: #373737;
+}
