@@ -22,12 +22,9 @@ public class HistoryController {
         List<History> histories;
 
         Session session = request.session(true);
-        String userIdStr = session.attribute("user_id").toString();
-        if (userIdStr == null || userIdStr.isEmpty()) {
-            Spark.halt(401, "No user id provided to see history");
-        }
-        int userId = Integer.parseInt(userIdStr);
+        int userId = session.attribute("user_id");
 
+        System.out.println(userId);
         User user = userDao.getUserById(userId);
         histories = historyDao.getStreamsHistoryForUser(userId);
 
@@ -36,4 +33,5 @@ public class HistoryController {
         model.put("histories", histories);
         return Template.render("history_list.html", model);
     }
+
 }

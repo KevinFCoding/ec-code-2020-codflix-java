@@ -2,6 +2,7 @@ package com.codflix.backend.features.media;
 
 import com.codflix.backend.core.Template;
 import com.codflix.backend.features.genre.GenreDao;
+import com.codflix.backend.features.history.HistoryDao;
 import com.codflix.backend.models.Genre;
 import com.codflix.backend.models.Media;
 import spark.Request;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class MediaController {
     private final MediaDao mediaDao = new MediaDao();
     private final GenreDao genreDao = new GenreDao();
+    private final HistoryDao historyDao = new HistoryDao();
 
     public String list(Request request, Response response) {
         List<Media> medias;
@@ -34,6 +36,10 @@ public class MediaController {
     }
 
     public String detail(Request request, Response res) {
+
+        Session session = request.session(true);
+        int userId = session.attribute("user_id");
+
         int id = Integer.parseInt(request.params(":id"));
         Media media = mediaDao.getMediaById(id);
         Genre genre = genreDao.getGenreById(media.getGenreId());
@@ -43,6 +49,9 @@ public class MediaController {
         Map<String, Object> model = new HashMap<>();
         model.put("media", media);
         model.put("genre", genre);
+
+        historyDao.addHistoryForUser(userId, media.getId());
+
         return Template.render("media_detail.html", model);
     }
 
