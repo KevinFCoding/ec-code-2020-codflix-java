@@ -1,7 +1,8 @@
 #parse("dashboard.html")
 #@mainLayout()
-<h2>Contactez-nous</h2>
-<div>
+
+<div class="col-md-8">
+    <h2>Contactez-nous</h2>
     <form method="POST" action="/contact" class="custom-form">
 
         <div class="form-group">
@@ -10,8 +11,8 @@
         </div>
 
         <div class="form-group">
-            <label for="contact_message_to_send">Confirmez votre mot de passe</label>
-            <input type="text" name="contact_message_to_send" id="contact_message_to_send" class="form-control"/>
+            <label for="contact_message_to_send">Que voulez-vous nous dire</label>
+            <input type="textarea" name="contact_message_to_send" id="contact_message_to_send" class="form-control"/>
         </div>
 
         <div class="form-group">
@@ -25,8 +26,9 @@
             </div>
         </div>
 
-        <span class="error-msg">
-    </span>
     </form>
+</div>
+<div class="col-md-4">
+    <h3>A propos de nous</h3>
 </div>
 #end

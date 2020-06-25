@@ -11,9 +11,7 @@
 .media-list .item {
     flex-basis: 24%;
     margin: 4px;
-
     background: #1f1f1f;
-
     padding-bottom: 25px;
 }
 
@@ -56,10 +54,14 @@
     color: #a71d2a;
 }
 
+
+.media-list .row button{
+    width: 20%;
+    color : #FFF;
+}
+
 .media-list .row{
-    overflow-x: scroll;
-    border: 1px solid black;
-    display: inline-block;
+    width: 100%;
 }
 
 #display-media {
