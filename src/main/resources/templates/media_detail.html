@@ -1,9 +1,26 @@
 #parse("dashboard.html")
 #@mainLayout()
-Medias
+<div class="row details-row">
+    <div class="col-md-9 col-sm-12 flex-grow-1" id="display-media">
+        <div>
+            <iframe allowfullscreen="true" width="100%" frameborder="0"
+                    src="$media.getTrailerUrl()"></iframe>
+        </div>
 
-<h1>Media Detail</h1>
-<div>$media.getTitle()</div>
-<div>$media.getType()</div>
+        #if($media.getType() == "serie")
+            <div>
+                <a class="item" href="/medias/$media.getId()/episodes">
+                <button type="button" class="btn btn-secondary">Voir les épisodes</button></a>
+            </div>
+        #end
+    </div>
+    <div class="col-md-3 col-sm-12 ">
+        <div id="side-details">
+            <h2>$media.getTitle()</h2>
+            <p>Type : $genre.getName()</p>
+        </div>
+    </div>
+</div>
+
 
 #end
