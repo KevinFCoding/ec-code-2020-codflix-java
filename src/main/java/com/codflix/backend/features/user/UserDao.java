@@ -7,16 +7,15 @@ import javax.swing.*;
 import java.sql.*;
 
 public class UserDao {
-    public User getUserByCredentials(String email, String password, String verified) {
+    public User getUserByCredentials(String email, String password) {
         User user = null;
 
         Connection connection = Database.get().getConnection();
         try {
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM user WHERE email=? AND password=? AND verified=?");
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM user WHERE email=? AND password=?");
 
             st.setString(1, email);
             st.setString(2, password);
-            st.setString(3, verified);
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -40,7 +39,6 @@ public class UserDao {
 
     public User getUserById(int userId) {
         User user = null;
-
         Connection connection = Database.get().getConnection();
         try {
             PreparedStatement st = connection.prepareStatement("SELECT * FROM user WHERE id=?");
@@ -58,10 +56,20 @@ public class UserDao {
         return user;
     }
 
-    public void addUnverifiedUser(String email, String password){
+    public boolean isUserVerified(String email){
+        Connection connection = Database.get().getConnection();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT verified FROM user WHERE email=?");
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            return rs.getBoolean(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
-        String newUserEmail = email;
-        String newUserPassword = password;
+    public void addUnverifiedUser(String email, String password){
 
         Connection connection = Database.get().getConnection();
         try {
@@ -70,8 +78,8 @@ public class UserDao {
 
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setString (1, newUserEmail);
-            preparedStmt.setString (2, newUserPassword);
+            preparedStmt.setString (1, email);
+            preparedStmt.setString (2, password);
             preparedStmt.setBoolean(3, false);
 
             preparedStmt.execute();
